@@ -58,7 +58,7 @@ const headers = {
  *           type: string
  *           items:
  *              type: string
- *           example: ["Url"]
+ *           example: {"url":"https://www.oracle.com/a/tech/img/og-computer-vision-facebook.jpg"}
  *     responses:
  *       200:
  *         description: Image Information Successfully Retrieved 
@@ -108,7 +108,7 @@ app.post("/ocr-analyze", (req, res) => {
  *           type: string
  *           items:
  *              type: string
- *           example: ["Url"]
+ *           example: {"url": "https://si-gau.cognitiveservices.azure.com/vision/v3.2/read/analyzeResults/b782d065-f109-4624-aaaa-c0f5b0bbbd11"}
  *     responses:
  *       200:
  *         description: Image Information Successfully Retrieved 
@@ -148,7 +148,7 @@ app.post("/ocr-read", (req, res) => {
  *           type: string
  *           items:
  *              type: string
- *           example: ["Url"]
+ *           example: {"url":"https://travel.home.sndimg.com/content/dam/images/travel/fullset/2012/08/20/70/waterfall-wonders_ss_001.rend.hgtvcom.966.725.suffix/1491581026366.jpeg"}
  *     responses:
  *       200:
  *         description: Image Information Successfully Retrieved 
