@@ -5,10 +5,13 @@ Si-Final-Project
 The Computer Vision service in Azure allows users to use complex ways to analyze images and deliver data depending on the visual elements you are concerned with.
 
 My project contains two API’s
+
 1.Text extraction- Optical character recognition((OCR) 
+
 2.Image understanding
 
 This project contains three endpoints:
+
 # 1./ocr-analyze
 This endpoint is used to analyze the image provided by the user.
 The desired output of this endpoint will give a url to the cognitive services of the Azure which contains the detailed analysis of the image.
@@ -25,6 +28,7 @@ Objects, faces, creatures, places are recognised as the responses for this endpo
 
 # Source Code:
 Github link: https://github.com/Sree-Gauthami-Gundaram/si-final-project
+
 Link to live API: http://137.184.125.91:3000/api-docs/
 
 
