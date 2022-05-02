@@ -1,2 +1,2 @@
-# si-final-project
+# SI-Final-Project
 Si-Final-Project
