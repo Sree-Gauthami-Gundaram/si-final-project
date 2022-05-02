@@ -5,16 +5,69 @@ const axios = require("axios").default;
 const PORT = process.env.PORT || 3000;
 const app = express();
 
+/* swagger Info */
+const swaggerUi = require("swagger-ui-express");
+const swaggerJsDoc = require("swagger-jsdoc");
+
+const options = {
+  swaggerDefinition: {
+    info: {
+      title: "System-Integration-Final-Project",
+      version: "1.0.0",
+      description: "Final project using Image Analytics from Azure",
+      contact: {
+        name: "Sree Gauthami Gundaram",
+        url: "https://github.com/Sree-Gauthami-Gundaram",
+        email: "sree.gauthami1@gmail.com",
+      },
+    },
+    host: "localhost:3000",
+    basePath: "/",
+  },
+  apis: ["./index.js"],
+};
+
+const specs = swaggerJsDoc(options);
+require("dotenv").config();
+
 app.use(cors());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
-const apikey = "df63dff6bbc649bbbb1c16838a6c3f4d";
+app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(specs));
+const apikey = process.env.API_KEY;
 const headers = {
   "Ocp-Apim-Subscription-Key": apikey,
   "Content-Type": "application/json",
 };
 
-app.get("/ocr-analyze", (req, res) => {
+/**
+ * @swagger
+ * /ocr-analyze:
+ *   post:
+ *     tags:
+ *       - Optical Character Recognition
+ *     description: Calls the Optical Character Recognition (OCR) API from Azure Text Analytics
+ *     produces:
+ *       - application/json
+ *     parameters:
+ *       - name: body
+ *         description: Input send to OCR API in Microsoft Azure.
+ *         in: body
+ *         required: true
+ *         schema:
+ *           type: string
+ *           items:
+ *              type: string
+ *           example: ["Url"]
+ *     responses:
+ *       200:
+ *         description: Image Information Successfully Retrieved 
+ *       400:
+ *          description: Request body is invalid
+ *       401: 
+ *          description: Access denied due to invalid subscription key
+ */
+app.post("/ocr-analyze", (req, res) => {
   let imgUrl = req.body;
   let opLocation = "";
 
@@ -37,7 +90,35 @@ app.get("/ocr-analyze", (req, res) => {
     });
 });
 
-app.get("/ocr-read", (req, res) => {
+/**
+ * @swagger
+ * /ocr-read:
+ *   post:
+ *     tags:
+ *       - Optical Character Recognition
+ *     description: Calls the Optical Character Recognition (OCR) API from Azure Text Analytics
+ *     produces:
+ *       - application/json
+ *     parameters:
+ *       - name: body
+ *         description: Input send to OCR API in Microsoft Azure.
+ *         in: body
+ *         required: true
+ *         schema:
+ *           type: string
+ *           items:
+ *              type: string
+ *           example: ["Url"]
+ *     responses:
+ *       200:
+ *         description: Image Information Successfully Retrieved 
+ *       400:
+ *          description: Request body is invalid
+ *       401: 
+ *          description: Access denied due to invalid subscription key
+ */
+
+app.post("/ocr-read", (req, res) => {
   let readUrl = req.body.url;
   axios
     .get(readUrl, { headers: headers })
@@ -49,7 +130,35 @@ app.get("/ocr-read", (req, res) => {
     });
 });
 
-app.get("/image-analyze", (req, res) => {
+/**
+ * @swagger
+ * /image-analyze:
+ *   post:
+ *     tags:
+ *       -  Image Understanding Recognition
+ *     description: Calls the Image Understanding (image-analyze) API from Azure Text Analytics
+ *     produces:
+ *       - application/json
+ *     parameters:
+ *       - name: body
+ *         description: Input send to image-analyze API in Microsoft Azure.
+ *         in: body
+ *         required: true
+ *         schema:
+ *           type: string
+ *           items:
+ *              type: string
+ *           example: ["Url"]
+ *     responses:
+ *       200:
+ *         description: Image Information Successfully Retrieved 
+ *       400:
+ *          description: Request body is invalid
+ *       401: 
+ *          description: Access denied due to invalid subscription key
+ */
+
+app.post("/image-analyze", (req, res) => {
   let imgUrl = req.body;
   axios
     .post(
